@@ -1,87 +1,54 @@
-﻿/// Przygotuj program, który policzy ile jakich cyfr
-/// występuje w podanej liczbie"
+﻿/// 1. Stwórz klasę Employee, w której przechowasz imię, nazwisko, wiek oraz punkty w postaci liczb całkowitych
 /// 
-/// Przykład:
-/// Wyniki dla liczby: 4566
-/// 0 => 0
-/// 1 => 0
-/// 2 => 0
-/// 3 => 0 
-/// 4 => 1
-/// 5 => 1
-/// 6 => 2
-/// 7 => 0
-/// 8 => 0
-/// 9 => 0
+/// 2. Stwórz 3 pracowników i każdemu przydziel po 5 ocen z zakesu od 1 do 10
+/// 
+/// 3. Napisz program, który wyszuka pracownika z najwyższą liczbą ocen a następnie wyświetli jego dane oraz wynik
+/// 
 
+using ChallengeApp;
 
-int number = 80089266;
-string numberInString = number.ToString(); //przerobienie liczby na string(teskst)
-char[] letters = numberInString.ToArray();
+Employee employee1 = new Employee("Adam", "Szkic", 65, 0);
+Employee employee2 = new Employee("Monika", "Kartka", 28, 0);
+Employee employee3 = new Employee("Zuzia", "Ołówek", 30, 0);
 
-int counter0 = 0;
-int counter1 = 0;
-int counter2 = 0;
-int counter3 = 0;
-int counter4 = 0;
-int counter5 = 0;
-int counter6 = 0;
-int counter7 = 0;
-int counter8 = 0;
-int counter9 = 0;
+employee1.Addpoint(5);
+employee1.Addpoint(2);
+employee1.Addpoint(1);
+employee1.Addpoint(7);
+employee1.Addpoint(8);
 
-foreach (char letter in letters)
+employee2.Addpoint(2);
+employee2.Addpoint(5);
+employee2.Addpoint(9);
+employee2.Addpoint(5);
+employee2.Addpoint(5);
+
+employee3.Addpoint(11);
+employee3.Addpoint(1);
+employee3.Addpoint(1);
+employee3.Addpoint(4);
+employee3.Addpoint(7);
+
+var result1 = employee1.Sum;
+var result2 = employee2.Sum;
+var result3 = employee3.Sum;
+var emplData1 = employee1.emplData;
+var emplData2 = employee2.emplData;
+var emplData3 = employee3.emplData;
+
+List<string> employess = new List<string> { emplData1, emplData2, emplData3 };
+List<int> wyniki = new List<int> { result1, result2, result3 };
+int maxPoints = wyniki.Max();
+List<string> winner = new List<string>();
+
+foreach (var res in wyniki.Select((value, i) => new { i, value }))
 {
-    if(letter == '0')
+    var value = res.value;
+    var index = res.i;
+    Console.WriteLine( value + " <--- " + employess[index] );
+    if(value == maxPoints)
     {
-        counter0++;
-    }
-    else if (letter == '1')
-    {
-        counter1++;
-    }
-    else if (letter == '2')
-    {
-        counter2++;
-    }
-    else if (letter == '3')
-    {
-        counter3++;
-    }
-    else if (letter == '4')
-    {
-        counter4++;
-    }
-    else if (letter == '5')
-    {
-        counter5++;
-    }
-    else if (letter == '6')
-    {
-        counter6++;
-    }
-    else if (letter == '7')
-    {
-        counter7++;
-    }
-    else if (letter == '8')
-    {
-        counter8++;
-    }
-    else if (letter == '9')
-    {
-        counter9++;
+        winner.Add(employess[index]);
     }
 }
-
-Console.WriteLine("Liczba: " + number);
-Console.WriteLine("0 => " + counter0);
-Console.WriteLine("1 => " + counter1);
-Console.WriteLine("2 => " + counter2);
-Console.WriteLine("3 => " + counter3);
-Console.WriteLine("4 => " + counter4);
-Console.WriteLine("5 => " + counter5);
-Console.WriteLine("6 => " + counter6);
-Console.WriteLine("7 => " + counter7);
-Console.WriteLine("8 => " + counter8);
-Console.WriteLine("9 => " + counter9);
+Console.WriteLine("Zwycięzca to: " + String.Join(", ", winner) + " Zdobyte punkt: " + maxPoints);
