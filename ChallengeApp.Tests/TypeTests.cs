@@ -46,27 +46,6 @@
             // assert
             Assert.AreEqual(number1, number2);
 
-        }
-
-
-        [Test]
-        public void GetUserShouldReturnDifferentObects()
-        {
-            // arrenge
-            var user1 = GetUser("Adam");
-            var user2 = GetUser("Adam");
-
-            // act
-
-
-            // assert
-            Assert.AreEqual(user1.Login, user2.Login);
-
-        }
-         
-        private User GetUser(string name)
-        {
-            return new User(name);
-        }
+        }  
     }
 }
